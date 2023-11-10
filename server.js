@@ -17,17 +17,6 @@ app.use(express.json());
 
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
 
-const sql = postgres({
-    host: PGHOST,
-    database: PGDATABASE,
-    username: PGUSER,
-    password: PGPASSWORD,
-    port: 5432,
-    ssl: 'require',
-    connection: {
-        options: `project=${ENDPOINT_ID}`,
-    },
-});
 
 // Database connection using the provided code
 const client = new Client({
@@ -53,7 +42,7 @@ connectToDatabase();
 app.route('/api/data')
     .get(async (req, res) => {
         try {
-            const result = await sql`SELECT * FROM your_table`;
+            const result = await client`SELECT * FROM your_table`;
             res.json(result);
         } catch (err) {
             console.error('Error executing query', err);
