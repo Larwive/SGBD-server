@@ -42,7 +42,11 @@ connectToDatabase();
 app.route('/api/data')
     .get(async (req, res) => {
         try {
-            const result = await client`SELECT * FROM your_table`;
+            const result = await client(
+                "SELECT $1::text as message", [
+                    "Hello world!",
+                ])
+            ;
             res.json(result);
         } catch (err) {
             console.error('Error executing query', err);
