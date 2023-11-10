@@ -11,6 +11,8 @@
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "body-parser":"*",
+    "bcrypt": "^5.1.1"
   }
 }
