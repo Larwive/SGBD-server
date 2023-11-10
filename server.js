@@ -42,7 +42,7 @@ connectToDatabase();
 app.route('/api/data')
     .get(async (req, res) => {
         try {
-            const result = await client(
+            const result = await client.query(
                 "SELECT $1::text as message", [
                     "Hello world!",
                 ])
