@@ -3,10 +3,11 @@ const app = express();
 const port = process.env.PORT || 3001;
 const cors = require('cors');
 const postgres = require('postgres');
+const { Client } = require("pg");
 require('dotenv').config();
 
 const corsOptions = {
-    origin: '*',//'https://larwive.github.io',
+    origin: '*', //'https://larwive.github.io',
 };
 
 // Enable CORS for all routes
@@ -28,16 +29,25 @@ const sql = postgres({
     },
 });
 
-async function getPgVersion() {
+// Database connection using the provided code
+const client = new Client({
+    user: "sgbd_holdclock",
+    host: "jnc.h.filess.io",
+    database: "sgbd_holdclock",
+    password: "65939ca6ee1ffde7b692cc96942297addfb93a74",
+    port: "5432",
+});
+
+async function connectToDatabase() {
     try {
-        const result = await sql`select version()`;
-        console.log(result);
+        await client.connect();
+        console.log('Connected to PostgreSQL database');
     } catch (err) {
         console.error('Error connecting to PostgreSQL:', err);
     }
 }
 
-getPgVersion();
+connectToDatabase();
 
 // Updated route to handle both GET and POST requests
 app.route('/api/data')
