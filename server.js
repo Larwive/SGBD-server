@@ -6,7 +6,7 @@ const postgres = require('postgres');
 require('dotenv').config();
 
 const corsOptions = {
-    origin: 'https://larwive.github.io',
+    origin: '*',//'https://larwive.github.io',
 };
 
 // Enable CORS for all routes
