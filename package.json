@@ -12,7 +12,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "body-parser":"*",
+    "body-parser": "*",
     "bcrypt": "^5.1.1",
     "postgres": "^3.4.3",
     "dotenv": "^16.3.1",
