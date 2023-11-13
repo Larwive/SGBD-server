@@ -49,13 +49,23 @@ app.route('/api/data')
             ;
             res.json(result);
         } catch (err) {
-            console.error('Error executing query', err);
-            res.status(500).json({ error: 'An error occurred' });
+            console.error('Error executing query (GET)', err);
+            res.status(500).json({ error: 'An error occurred (GET)' });
         }
     })
-    .post((req, res) => {
-        // Handle POST requests if needed
-        res.status(405).json({ error: 'Method Not Allowed' });
+    .post(async (req, res) => {
+
+        const postData = req.body;
+        console.log("${postData.queryType} ${postData.fetching} ${postData.table};");
+
+        try {
+            // Assuming postData has necessary information for your query
+            const result = await client`${postData.queryType} ${postData.fetching} ${postData.table};`;
+            res.json(result);
+        } catch (err) {
+            console.error('Error executing query (POST)', err);
+            res.status(500).json({ error: 'An error occurred (POST)' });
+        }
     });
 
 app.listen(port, () => {
