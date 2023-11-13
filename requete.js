@@ -10,3 +10,7 @@ function nbVehiculesConfiees() {
     return "SELECT clients.*, COUNT(immatriculation) AS \"nombre de véhicules confiés\" FROM clients NATURAL JOIN vehicules GROUP BY id_client;";
 }
 
+//Liste des interventions prévues dans les deux prochains mois.
+function listInterventionsDeuxMois() {
+    return "SELECT * FROM interventions WHERE date_prise_en_charge >= CURRENT_DATE AND date_prise_en_charge <= CURRENT_DATE + INTERVAL '2 months';\n"
+}
