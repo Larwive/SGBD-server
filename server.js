@@ -45,7 +45,7 @@ app.route('/api/data')
         try {
             const result = await client.query(
                 "SELECT $1::text as message", [
-                    "Hello world from node.js server with git pull integration! Teemo. Ça doit piquer. Et ouais.",
+                    "Hello world from node.js server ! Hey. broootttttt",
                 ])
             ;
             res.json(result);
@@ -75,7 +75,7 @@ app.post('/git', (req, res) => {
     if (req.headers['x-github-event'] === "push") {
         if (req.headers['x-github-event'] === "push") {
             cmd.run('chmod 777 git.sh'); /* :/ Fix no perms after updating */
-            cmd.get('sleep 1 && ./git.sh', (err, data) => {  // Run our script
+            cmd.run('sleep 1 && ./git.sh', (err, data) => {  // Run our script
                 if (data) console.log(data);
                 if (err) console.log(err);
             });
