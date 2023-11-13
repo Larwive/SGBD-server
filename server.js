@@ -45,7 +45,7 @@ app.route('/api/data')
         try {
             const result = await client.query(
                 "SELECT $1::text as message", [
-                    "Hello world from node.js server ! Hey. broootttttterdsder ?!",
+                    "Hello world from node.js server ! Hey shroo ?!",
                 ])
             ;
             res.json(result);
