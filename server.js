@@ -6,6 +6,8 @@ const postgres = require('postgres');
 const { Client } = require("pg");
 require('dotenv').config();
 
+const cmd = require("node-cmd"); //Auto github update
+
 const corsOptions = {
     origin: '*', //'https://larwive.github.io',
 };
@@ -66,6 +68,22 @@ app.route('/api/data')
             res.status(500).json({ error: 'An error occurred (POST)' });
         }
     });
+
+//Auto github update
+app.post('/git', (req, res) => {
+    // If event is "push"
+    if (req.headers['x-github-event'] === "push") {
+        if (req.headers['x-github-event'] === "push") {
+            cmd.run('chmod 777 git.sh'); /* :/ Fix no perms after updating */
+            cmd.get('./git.sh', (err, data) => {  // Run our script
+                if (data) console.log(data);
+                if (err) console.log(err);
+            });
+            cmd.run('refresh');  // Refresh project
+
+            console.log("> [GIT] Updated with origin/master");
+        }
+    }})
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}.`);
