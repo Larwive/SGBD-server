@@ -18,7 +18,7 @@ app.use(express.json());
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
 
 
-// Database connection using the provided code
+// Database connection
 const client = new Client({
     user: "fyqtkvlq",
     host: "flora.db.elephantsql.com",
@@ -38,7 +38,7 @@ async function connectToDatabase() {
 
 connectToDatabase();
 
-// Updated route to handle both GET and POST requests
+// Handle both GET and POST requests
 app.route('/api/data')
     .get(async (req, res) => {
         console.log("Here (GET).\n");
@@ -61,7 +61,6 @@ app.route('/api/data')
         console.log("${postData.queryType} ${postData.fetching} ${postData.table};\n");
 
         try {
-            // Assuming postData has necessary information for your query
             const result = await client.query(`${postData.queryType} ${postData.fetching} ${postData.table};`);
             res.json(result);
         } catch (err) {
