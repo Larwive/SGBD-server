@@ -15,15 +15,13 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
-const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
 
-
-// Database connection using the provided code
+// Database connection
 const client = new Client({
-    user: "sgbd_holdclock",
-    host: "jnc.h.filess.io",
-    database: "sgbd_holdclock",
-    password: "65939ca6ee1ffde7b692cc96942297addfb93a74",
+    user: "fyqtkvlq",
+    host: "flora.db.elephantsql.com",
+    database: "fyqtkvlq",
+    password: "toDYnbZmOfBhVKB7RRE1QUlxzr7I3aBz",
     port: "5432",
 });
 
@@ -38,9 +36,10 @@ async function connectToDatabase() {
 
 connectToDatabase();
 
-// Updated route to handle both GET and POST requests
+// Handle both GET and POST requests
 app.route('/api/data')
     .get(async (req, res) => {
+        console.log("Here (GET).\n");
         try {
             const result = await client.query(
                 "SELECT $1::text as message", [
@@ -56,11 +55,11 @@ app.route('/api/data')
     .post(async (req, res) => {
 
         const postData = req.body;
-        console.log("${postData.queryType} ${postData.fetching} ${postData.table};");
+
+        console.log(`${postData.queryType} ${postData.fetching} ${postData.table};\n`);
 
         try {
-            // Assuming postData has necessary information for your query
-            const result = await client`${postData.queryType} ${postData.fetching} ${postData.table};`;
+            const result = await client.query(`${postData.queryType} ${postData.fetching} ${postData.table};`);
             res.json(result);
         } catch (err) {
             console.error('Error executing query (POST)', err);
