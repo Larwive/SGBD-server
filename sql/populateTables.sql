@@ -4,7 +4,7 @@ INSERT INTO constructeurs(nom_constructeur) VALUES ('Toyota');
 
 --Clients
 INSERT INTO clients(nom_client, prenom_client, adresse_client, mail_client, telephone_client) VALUES ('Fensif', 'Ino', '1 rue Peyronnet', 'ino.fensif@cou.pable', '0666666666');
-***REMOVED***
+INSERT INTO clients(nom_client, prenom_client, adresse_client, mail_client, telephone_client) VALUES ('Trugernaner', 'Bernard', '18 rue Du Chateau Bègles', 'btrug@enseirb-matmeca.fr', '0720998517');
 
 --Pieces
 INSERT INTO pieces(nom_piece) VALUES ('Volant');
