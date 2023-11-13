@@ -62,7 +62,7 @@ app.route('/api/data')
 
         try {
             // Assuming postData has necessary information for your query
-            const result = await client`${postData.queryType} ${postData.fetching} ${postData.table};`;
+            const result = await client.query(`${postData.queryType} ${postData.fetching} ${postData.table};`);
             res.json(result);
         } catch (err) {
             console.error('Error executing query (POST)', err);
