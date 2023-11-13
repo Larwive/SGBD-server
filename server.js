@@ -1,54 +1,75 @@
-const path = require("path");
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3001;
+const cors = require('cors');
+const postgres = require('postgres');
+const { Client } = require("pg");
+require('dotenv').config();
 
-// Require the fastify framework and instantiate it
-const fastify = require("fastify")({
-  // set this to true for detailed logging:
-  logger: false,
+const corsOptions = {
+    origin: '*', //'https://larwive.github.io',
+};
+
+// Enable CORS for all routes
+app.use(cors(corsOptions));
+
+app.use(express.json());
+
+const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
+
+
+// Database connection using the provided code
+const client = new Client({
+    user: "fyqtkvlq",
+    host: "flora.db.elephantsql.com",
+    database: "fyqtkvlq",
+    password: "toDYnbZmOfBhVKB7RRE1QUlxzr7I3aBz",
+    port: "5432",
 });
 
-// Setup our static files
-fastify.register(require("@fastify/static"), {
-  root: path.join(__dirname, "public"),
-  prefix: "/", // optional: default '/'
-});
-
-// fastify-formbody lets us parse incoming forms
-fastify.register(require("@fastify/formbody"));
-
-// point-of-view is a templating manager for fastify
-fastify.register(require("@fastify/view"), {
-  engine: {
-    handlebars: require("handlebars"),
-  },
-});
-
-// Our main GET home page route, pulls from src/pages/index.hbs
-fastify.get("/", function (request, reply) {
-  // params is an object we'll pass to our handlebars template
-  let params = {
-    greeting: "Hello Node!",
-  };
-  // request.query.paramName <-- a querystring example
-  return reply.view("/src/pages/index.hbs", params);
-});
-
-// A POST route to handle form submissions
-fastify.post("/", function (request, reply) {
-  let params = {
-    greeting: "Hello Form!",
-  };
-  // request.body.paramName <-- a form post example
-  return reply.view("/src/pages/index.hbs", params);
-});
-
-// Run the server and report out to the logs
-fastify.listen(
-  { port: process.env.PORT, host: "0.0.0.0" },
-  function (err, address) {
-    if (err) {
-      console.error(err);
-      process.exit(1);
+async function connectToDatabase() {
+    try {
+        await client.connect();
+        console.log('Connected to PostgreSQL database');
+    } catch (err) {
+        console.error('Error connecting to PostgreSQL:', err);
     }
-    console.log(`Your app is listening on ${address}`);
-  }
-);
+}
+
+connectToDatabase();
+
+// Updated route to handle both GET and POST requests
+app.route('/api/data')
+    .get(async (req, res) => {
+        console.log("Here (GET).\n");
+        try {
+            const result = await client.query(
+                "SELECT $1::text as message", [
+                    "Hello world from node.js server ! ",
+                ])
+            ;
+            res.json(result);
+        } catch (err) {
+            console.error('Error executing query (GET)', err);
+            res.status(500).json({ error: 'An error occurred (GET)' });
+        }
+    })
+    .post(async (req, res) => {
+
+        const postData = req.body;
+        console.log("Here (POST).\n");
+        console.log("${postData.queryType} ${postData.fetching} ${postData.table};\n");
+
+        try {
+            // Assuming postData has necessary information for your query
+            const result = await client`${postData.queryType} ${postData.fetching} ${postData.table};`;
+            res.json(result);
+        } catch (err) {
+            console.error('Error executing query (POST)', err);
+            res.status(500).json({ error: 'An error occurred (POST)' });
+        }
+    });
+
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}.`);
+});

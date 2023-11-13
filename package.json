@@ -1,27 +1,21 @@
 {
-  "name": "glitch-mvp-node",
-  "version": "0.1.0",
-  "description": "A simple Node app built on fastify, instantly up and running.",
+  "name": "sgbd-server",
+  "version": "1.0.0",
+  "description": "SGBD server.",
   "main": "server.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "dependencies": {
-    "fastify": "^4.21.0",
-    "handlebars": "^4.7.8",
-    "@fastify/view": "^8.0.0",
-    "@fastify/static": "^6.10.2",
-    "@fastify/formbody": "^7.4.0"
-  },
-  "engines": {
-    "node": "14.x"
-  },
-  "repository": {
-    "url": "https://glitch.com/edit/#!/glitch-mvp-node"
-  },
+  "author": "",
   "license": "MIT",
-  "keywords": [
-    "node",
-    "glitch"
-  ]
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "body-parser": "*",
+    "bcrypt": "^5.1.1",
+    "postgres": "^3.4.3",
+    "dotenv": "^16.3.1",
+    "pg": "^8.11.3"
+  }
 }
