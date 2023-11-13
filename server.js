@@ -48,8 +48,8 @@ app.route('/api/data')
             ;
             res.json(result);
         } catch (err) {
-            console.error('Error executing query (GET)', err);
-            res.status(500).json({ error: 'An error occurred (GET)' });
+            console.error('Error executing query (GET).', err);
+            res.status(500).json({ error: 'An error occurred (GET).' });
         }
     })
     .post(async (req, res) => {
