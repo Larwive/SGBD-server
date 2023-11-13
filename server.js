@@ -20,11 +20,11 @@ app.use(express.json());
 
 // Database connection
 const client = new Client({
-    user: "fyqtkvlq",
-    host: "flora.db.elephantsql.com",
-    database: "fyqtkvlq",
-    password: "toDYnbZmOfBhVKB7RRE1QUlxzr7I3aBz",
-    port: "5432",
+    user: process.env.USER,
+    host: process.env.HOST,
+    database: process.env.DATABASE,
+    password: process.env.PASSWORD,
+    port: process.env.PORT,
 });
 
 async function connectToDatabase() {
