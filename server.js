@@ -45,7 +45,7 @@ app.route('/api/data')
         try {
             const result = await client.query(
                 "SELECT $1::text as message", [
-                    "Hello world from node.js server with git pull integration! ",
+                    "Hello world from node.js server with git pull integration! Teemo.",
                 ])
             ;
             res.json(result);
