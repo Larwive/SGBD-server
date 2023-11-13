@@ -45,7 +45,7 @@ app.route('/api/data')
         try {
             const result = await client.query(
                 "SELECT $1::text as message", [
-                    "Hello world from node.js server ! Hey shrooming ?!",
+                    "Hello world from node.js server ! Hey shrooming again ?!",
                 ])
             ;
             res.json(result);
@@ -83,7 +83,7 @@ app.post('/git', (req, res) => {
             let commits = req.body.head_commit.message.split("\n").length === 1 ?
                 req.body.head_commit.message :
                 req.body.head_commit.message.split("\n").map((el, i) => i !== 0 ? "                       " + el : el).join("\n");
-            console.log(`> [GIT] Updated with origin/master\n` +
+            console.log(`> [GIT] Updated with origin/main\n` +
                 `        Latest commit: ${commits}`);
         }
     }})
