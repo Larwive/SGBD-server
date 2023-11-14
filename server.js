@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3001;
 const cors = require('cors');
-const postgres = require('postgres');
+//const postgres = require('postgres');
 const {Client} = require("pg");
 require('dotenv').config();
 
@@ -85,6 +85,7 @@ app.post('/git', (req, res) => {
             cmd.run('sleep 1 && ./git.sh', (err, data) => {  // Run our script
                 if (data) console.log(data);
                 if (err) console.log(err);
+                return res.status(500).json({error: 'Error running git.sh script.'});
             });
             cmd.run('refresh');  // Refresh project
             let commits = req.body.head_commit.message.split("\n").length === 1 ?
@@ -94,6 +95,7 @@ app.post('/git', (req, res) => {
                 `        Latest commit: ${commits}`);
         }
     }
+    return res.status(200).json({success: 'Webhook received successfully.'});
 })
 
 app.listen(port, () => {
