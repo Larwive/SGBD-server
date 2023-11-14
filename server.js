@@ -3,11 +3,11 @@ const app = express();
 const port = process.env.PORT || 3001;
 const cors = require('cors');
 const postgres = require('postgres');
-const { Client } = require("pg");
+const {Client} = require("pg");
 require('dotenv').config();
 
 const cmd = require("node-cmd"); //Auto github update
-
+const crypto = require("crypto"); //Auto github update's security
 const corsOptions = {
     origin: '*', //'https://larwive.github.io',
 };
@@ -45,13 +45,13 @@ app.route('/api/data')
         try {
             const result = await client.query(
                 "SELECT $1::text as message", [
-                    "Hello world from node.js server !  Et ouais.",
+                    "Hello world from node.js server ! Et ouais.",
                 ])
             ;
             res.json(result);
         } catch (err) {
             console.error('Error executing query (GET).', err);
-            res.status(500).json({ error: 'An error occurred (GET).' });
+            res.status(500).json({error: 'An error occurred (GET).'});
         }
     })
     .post(async (req, res) => {
@@ -68,14 +68,17 @@ app.route('/api/data')
             console.log("Result sent.")
         } catch (err) {
             console.error('Error executing query (POST) ', err);
-            res.status(500).json({ error: 'An error occurred (POST)' });
+            res.status(500).json({error: 'An error occurred (POST)'});
         }
     });
 
 //Auto github update
 app.post('/git', (req, res) => {
+    let hmac = crypto.createHmac("sha1", process.env.SECRET);
+    let sig = "sha1=" + hmac.update(JSON.stringify(req.body)).digest("hex");
+
     // If event is "push"
-    if (req.headers['x-github-event'] === "push") {
+    if (req.headers['x-github-event'] === "push" && sig === req.headers['x-hub-signature']) {
         console.log("Push incoming...");
         if (req.headers['x-github-event'] === "push") {
             cmd.run('chmod 777 git.sh'); /* :/ Fix no perms after updating */
@@ -90,7 +93,8 @@ app.post('/git', (req, res) => {
             console.log(`> [GIT] Updated with origin/main\n ` +
                 `        Latest commit: ${commits}`);
         }
-    }})
+    }
+})
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}.`);
