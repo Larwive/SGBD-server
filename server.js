@@ -61,16 +61,25 @@ app.route('/api/data')
         console.log(`${postData.queryType} ${postData.fetching} ${postData.table};\n`);
 
         try {
-            console.log("Sending query...")
             const result = await client.query(`${postData.queryType} ${postData.fetching} ${postData.table};`);
-            console.log("Successfull query.")
             res.json(result);
-            console.log("Result sent.")
         } catch (err) {
             console.error('Error executing query (POST).', err);
             res.status(500).json({error: 'An error occurred (POST)'});
         }
     });
+
+
+app.post('/users', async (req, res) => {
+    try {
+        const countQuery = await client.query(`SELECT COUNT(*) FROM clients;`);
+        const rowsQuery = await client.query(`SELECT * FROM clients;`);
+        res.json({
+            count: countQuery.rows[0].count,
+            rows: rowsQuery.rows
+        });
+    } catch (err) {
+        console.error('Error getting the clients table\'s data.', err);
 
 app.post('/users/count', async (req, res) => {
     try {
