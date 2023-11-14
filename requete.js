@@ -14,3 +14,8 @@ function nbVehiculesConfiees() {
 function listInterventionsDeuxMois() {
     return "SELECT * FROM interventions WHERE date_prise_en_charge >= CURRENT_DATE AND date_prise_en_charge <= CURRENT_DATE + INTERVAL '2 months';\n"
 }
+
+//Liste des modèles pris en charge il y a moins d'un an.
+function listeModeleAnneeEcoulee() {
+    return "SELECT DISTINCT modeles.* FROM modeles NATURAL JOIN vehicules NATURAL JOIN interventions WHERE date_prise_en_charge <= CURRENT_DATE AND date_prise_en_charge >= CURRENT_DATE - INTERVAL '1 year';\n"
+}
