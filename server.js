@@ -67,7 +67,7 @@ app.route('/api/data')
             res.json(result);
             console.log("Result sent.")
         } catch (err) {
-            console.error('Error executing query (POST) ', err);
+            console.error('Error executing query (POST).', err);
             res.status(500).json({error: 'An error occurred (POST)'});
         }
     });
