@@ -81,16 +81,6 @@ app.post('/users', async (req, res) => {
     } catch (err) {
         console.error('Error getting the clients table\'s data.', err);
 
-app.post('/users/count', async (req, res) => {
-    try {
-        const result = await client.query(`SELECT COUNT(*) FROM clients;`);
-        res.json(result);
-    } catch (err) {
-        console.error('Error getting the number of clients.', err);
-        res.status(500).json({error: 'An error occurred during database query.'});
-    }
-})
-
 //Auto github update
 app.post('/git', (req, res) => {
     let hmac = crypto.createHmac("sha1", process.env.SECRET);
