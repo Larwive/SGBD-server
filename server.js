@@ -38,7 +38,7 @@ async function connectToDatabase() {
 
 connectToDatabase();
 
-// Handle both GET and POST requests
+// Handle both GET and POST requests for /api/data
 app.route('/api/data')
     .get(async (req, res) => {
         console.log("Here (GET).\n");
@@ -61,16 +61,23 @@ app.route('/api/data')
         console.log(`${postData.queryType} ${postData.fetching} ${postData.table};\n`);
 
         try {
-            console.log("Sending query...")
             const result = await client.query(`${postData.queryType} ${postData.fetching} ${postData.table};`);
-            console.log("Successfull query.")
             res.json(result);
-            console.log("Result sent.")
         } catch (err) {
             console.error('Error executing query (POST).', err);
             res.status(500).json({error: 'An error occurred (POST)'});
         }
     });
+
+app.post('/users/count', async (req, res) => {
+    try {
+        const result = await client.query(`SELECT COUNT(*) FROM clients;`);
+        res.json(result);
+    } catch (err) {
+        console.error('Error getting the number of clients.', err);
+        res.status(500).json({error: 'An error occurred during database query.'});
+    }
+})
 
 //Auto github update
 app.post('/git', (req, res) => {
