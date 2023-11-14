@@ -69,6 +69,7 @@ app.route('/api/data')
         }
     });
 
+
 app.post('/users', async (req, res) => {
     try {
         const countQuery = await client.query(`SELECT COUNT(*) FROM clients;`);
@@ -79,6 +80,13 @@ app.post('/users', async (req, res) => {
         });
     } catch (err) {
         console.error('Error getting the clients table\'s data.', err);
+
+app.post('/users/count', async (req, res) => {
+    try {
+        const result = await client.query(`SELECT COUNT(*) FROM clients;`);
+        res.json(result);
+    } catch (err) {
+        console.error('Error getting the number of clients.', err);
         res.status(500).json({error: 'An error occurred during database query.'});
     }
 })
