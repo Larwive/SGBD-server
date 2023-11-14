@@ -7,7 +7,6 @@ INSERT INTO constructeurs(nom_constructeur) VALUES ('Tesla');
 
 --Clients
 INSERT INTO clients(nom_client, prenom_client, adresse_client, mail_client, telephone_client) VALUES ('Fensif', 'Ino', '1 rue Peyronnet', 'ino.fensif@cou.pable', '0666666666');
-INSERT INTO clients(nom_client, prenom_client, adresse_client, mail_client, telephone_client) VALUES ('Peyrondet', 'Louis', '6 rue François Boucherie Bègles', 'lpeyrondet@enseirb-matmeca.fr', '0782632346');
 INSERT INTO clients(nom_client, prenom_client, adresse_client, mail_client, telephone_client) VALUES ('Musk', 'Elon', '3500 Deer Creek Road Palo Alto, CA 94304 United States', 'jesuiselonmusk@tesla.com', '0988981745');
 
 --Pieces
