@@ -30,7 +30,7 @@ const client = new Client({
 async function connectToDatabase() {
     try {
         await client.connect();
-        console.log('Connected to PostgreSQL database');
+        console.log('Connected to PostgreSQL database.');
     } catch (err) {
         console.error('Error connecting to PostgreSQL:', err);
     }
@@ -45,7 +45,7 @@ app.route('/api/data')
         try {
             const result = await client.query(
                 "SELECT $1::text as message", [
-                    "Hello world from node.js server ! Ready to help.",
+                    "Hello world from node.js server ! Reaady.",
                 ])
             ;
             res.json(result);
@@ -73,6 +73,7 @@ app.route('/api/data')
 app.post('/git', (req, res) => {
     // If event is "push"
     if (req.headers['x-github-event'] === "push") {
+        console.log("Push incoming...");
         if (req.headers['x-github-event'] === "push") {
             cmd.run('chmod 777 git.sh'); /* :/ Fix no perms after updating */
             cmd.run('sleep 1 && ./git.sh', (err, data) => {  // Run our script
@@ -83,7 +84,7 @@ app.post('/git', (req, res) => {
             let commits = req.body.head_commit.message.split("\n").length === 1 ?
                 req.body.head_commit.message :
                 req.body.head_commit.message.split("\n").map((el, i) => i !== 0 ? "                       " + el : el).join("\n");
-            console.log(`> [GIT] Updated with origin/main\n` +
+            console.log(`> [GIT] Updated with origin/main\n ` +
                 `        Latest commit: ${commits}`);
         }
     }})
