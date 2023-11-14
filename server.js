@@ -24,7 +24,7 @@ const client = new Client({
     host: `${process.env.HOST}`,
     database: `${process.env.DATABASE}`,
     password: `${process.env.PASSWORD}`,
-    port: process.env.PORT,
+    //port: process.env.PORT,
 });
 
 async function connectToDatabase() {
@@ -45,7 +45,7 @@ app.route('/api/data')
         try {
             const result = await client.query(
                 "SELECT $1::text as message", [
-                    "Hello world from node.js server ! Reaady.",
+                    "Hello world from node.js server !  Et ouais.",
                 ])
             ;
             res.json(result);
@@ -61,10 +61,13 @@ app.route('/api/data')
         console.log(`${postData.queryType} ${postData.fetching} ${postData.table};\n`);
 
         try {
+            console.log("Sending query...")
             const result = await client.query(`${postData.queryType} ${postData.fetching} ${postData.table};`);
+            console.log("Successfull query.")
             res.json(result);
+            console.log("Result sent.")
         } catch (err) {
-            console.error('Error executing query (POST)', err);
+            console.error('Error executing query (POST) ', err);
             res.status(500).json({ error: 'An error occurred (POST)' });
         }
     });
