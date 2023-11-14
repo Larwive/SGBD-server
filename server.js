@@ -9,7 +9,7 @@ require('dotenv').config();
 const cmd = require("node-cmd"); //Auto github update
 const crypto = require("crypto"); //Auto github update's security
 const corsOptions = {
-    origin: '*', //'https://larwive.github.io',
+    origin: ['https://larwive.github.io', 'https://api.github.com', 'http://localhost:*'], // Reminder : enlever localhost:*
 };
 
 // Enable CORS for all routes
@@ -45,7 +45,7 @@ app.route('/api/data')
         try {
             const result = await client.query(
                 "SELECT $1::text as message", [
-                    "Hello world from node.js server ! Et ouais.",
+                    "Hello world from node.js server ! Et ouais Teemo.",
                 ])
             ;
             res.json(result);
