@@ -14,3 +14,8 @@ function nbVehiculesConfiees() {
 function listInterventionsDeuxMois() {
     return "SELECT * FROM interventions WHERE date_prise_en_charge >= CURRENT_DATE AND date_prise_en_charge <= CURRENT_DATE + INTERVAL '2 months';\n"
 }
+
+//Liste des modèle avec le type d'intervention le plus fréquemment réalisé sur chacun des modèles.
+function interventionsModelesFrequents() {
+    return "SELECT DISTINCT ON (id_modele) id_modele, type_intervention, COUNT(type_intervention) AS intervention_count FROM modeles NATURAL JOIN vehicules NATURAL JOIN interventions GROUP BY id_modele, type_intervention ORDER BY id_modele, intervention_count DESC;;\n"
+}
