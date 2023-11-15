@@ -80,6 +80,7 @@ app.post('/users', async (req, res) => {
         });
     } catch (err) {
         console.error('Error getting the clients table\'s data.', err);
+    }})
 
 //Auto github update
 app.post('/git', (req, res) => {
