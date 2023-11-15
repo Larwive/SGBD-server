@@ -17,7 +17,6 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
-
 // Database connection
 const client = new Client({
     user: `${process.env.USER}`,
@@ -41,13 +40,8 @@ connectToDatabase();
 // Handle both GET and POST requests for /api/data
 app.route('/api/data')
     .get(async (req, res) => {
-        console.log("Here (GET).\n");
         try {
-            const result = await client.query(
-                "SELECT $1::text as message", [
-                    "Hello world from node.js server !",
-                ])
-            ;
+            const result = await client.query("SELECT $1::text as message", ["Hello world from node.js server !",]);
             res.json(result);
         } catch (err) {
             console.error('Error executing query (GET).', err);
@@ -70,7 +64,7 @@ app.route('/api/data')
     });
 
 
-app.post('/users', async (req, res) => {
+app.get('/users', async (req, res) => {
     try {
         const countQuery = await client.query(`SELECT COUNT(*) FROM clients;`);
         const rowsQuery = await client.query(`SELECT * FROM clients;`);
@@ -80,6 +74,7 @@ app.post('/users', async (req, res) => {
         });
     } catch (err) {
         console.error('Error getting the clients table\'s data.', err);
+        res.status(500).json({error: 'An error occurred (GET)'});
     }})
 
 //Auto github update
