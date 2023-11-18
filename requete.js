@@ -23,5 +23,9 @@ function interventionsModelesFrequents() {
 //Liste des modèles pris en charge il y a moins d'un an.
 function listeModeleAnneeEcoulee() {
     return "SELECT DISTINCT modeles.* FROM modeles NATURAL JOIN vehicules NATURAL JOIN interventions WHERE date_prise_en_charge <= CURRENT_DATE AND date_prise_en_charge >= CURRENT_DATE - INTERVAL '1 year';\n"
+}
 
+//Nombre d'heures facturées par mois.
+function nbHeuresFacturees() {
+    return "SELECT TO_CHAR(EXTRACT('Year' FROM date_prise_en_charge), '9999') \"année\", TO_CHAR(EXTRACT('Month' FROM date_prise_en_charge), '99') \"mois\", SUM(cout_action) \"heures facturées\" FROM interventions NATURAL JOIN actions GROUP BY EXTRACT('Year' FROM date_prise_en_charge), EXTRACT('Month' FROM date_prise_en_charge) ORDER BY \"année\", \"mois\";\n"
 }
