@@ -70,7 +70,7 @@ app
         }
     });
 
-app.post("/users", async (req, res): Promise<void> => {
+app.get("/users", async (req, res): Promise<void> => {
     try {
         const countQuery = await client.query(`SELECT COUNT(*) FROM clients;`);
         const rowsQuery = await client.query(`SELECT * FROM clients;`);
@@ -80,6 +80,7 @@ app.post("/users", async (req, res): Promise<void> => {
         });
     } catch (err) {
         console.error("Error getting the clients table's data.", err);
+        res.status(500).json({error: 'An error occurred (GET)'});
     }
 });
 
