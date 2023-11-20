@@ -1,0 +1,21 @@
+{
+  "install": {
+    "include": [
+      "^package\\.json$",
+      "^\\.env$"
+    ],
+    "postinstall": "npm i --save-dev @types/cors && npm i --save-dev @types/pg"
+  },
+  "restart": {
+    "exclude": [
+      "^public/",
+      "^dist/"
+    ],
+    "include": [
+      "\\.js$",
+      "\\.json",
+      "\\.md$"
+    ]
+  },
+  "throttle": 1000
+}
