@@ -24,11 +24,10 @@ app.use(express.json());
 
 // Database connection
 const client = new Client({
-    user: `${process.env.USER}`,
-    host: `${process.env.HOST}`,
-    database: `${process.env.DATABASE}`,
-    password: `${process.env.PASSWORD}`,
-    //port: process.env.PORT,
+    user: `${process.env.DB_USER}`,
+    host: `${process.env.DB_HOST}`,
+    database: `${process.env.DB_NAME}`,
+    password: `${process.env.DB_PASSWORD}`,
 });
 
 async function connectToDatabase(): Promise<void> {
