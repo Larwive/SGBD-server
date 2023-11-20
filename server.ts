@@ -47,7 +47,7 @@ app
     .get(async (req, res): Promise<void> => {
         try {
             const result = await client.query("SELECT $1::text as message", [
-                "Hello world from node.js server !",
+                "You're making a GET request. Do POST requests to access the database.",
             ]);
             res.json(result);
         } catch (err) {
@@ -70,7 +70,7 @@ app
         }
     });
 
-app.get("/users", async (req, res): Promise<void> => {
+app.post("/users", async (req, res): Promise<void> => {
     try {
         const countQuery = await client.query(`SELECT COUNT(*) FROM clients;`);
         const rowsQuery = await client.query(`SELECT * FROM clients;`);
