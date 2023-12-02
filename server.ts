@@ -6,18 +6,22 @@ require("dotenv").config();
 
 export const app = express();
 
+//Comptes
+import {admin, employe, checkRights} from "./account";
 
 //Routes
 import {route_users} from "./routes/users";
 import {route_intervention} from "./routes/intervention";
 import {route_git} from "./routes/git";
 import {route_data} from "./routes/data";
+import {reset_tables} from "./routes/reset";
 
 
 route_users();
 route_intervention();
 route_git();
 route_data();
+reset_tables();
 
 const port: String | 3001 = process.env.PORT || 3001;
 const corsOptions: { origin: string[] } = {
