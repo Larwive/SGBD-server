@@ -8,6 +8,7 @@ INSERT INTO constructeurs(nom_constructeur) VALUES ('Tesla');
 --Clients
 INSERT INTO clients(nom_client, prenom_client, adresse_client, mail_client, telephone_client) VALUES ('Fensif', 'Ino', '1 rue Peyronnet', 'ino.fensif@cou.pable', '0666666666');
 INSERT INTO clients(nom_client, prenom_client, adresse_client, mail_client, telephone_client) VALUES ('Musk', 'Elon', '3500 Deer Creek Road Palo Alto, CA 94304 United States', 'jesuiselonmusk@tesla.com', '0988981745');
+INSERT INTO clients(nom_client, prenom_client, adresse_client, mail_client, telephone_client) VALUES ('X9pok', 'Guhu', '1 rocher nord, Mars', 'jesuisunalien@mars.space', '010101110101');
 
 --Pieces
 INSERT INTO pieces(nom_piece) VALUES ('Volant');
@@ -53,6 +54,7 @@ INSERT INTO modeles(nom_modele, type_motorisation, id_constructeur) VALUES ('Cam
 INSERT INTO modeles(nom_modele, type_motorisation, id_constructeur) VALUES ('Peugeot 208', 'Thermique', 3);
 INSERT INTO modeles(nom_modele, type_motorisation, id_constructeur) VALUES ('Citroën C3', 'Thermique', 4);
 INSERT INTO modeles(nom_modele, type_motorisation, id_constructeur) VALUES ('Model Y', 'Electrique', 5);
+INSERT INTO modeles(nom_modele, type_motorisation, id_constructeur) VALUES ('Model 35', 'Electrique', 5);
 
 --Vehicules
 INSERT INTO vehicules(immatriculation, date_de_mise_en_circulation, type_vehicule, id_client, id_modele) VALUES ('BA-567-TE', '2022-07-15', '16x16', 1, 1);
@@ -72,13 +74,13 @@ INSERT INTO interventions(date_prise_en_charge, date_retour_prevue, kilometrage,
 INSERT INTO interventions(date_prise_en_charge, date_retour_prevue, kilometrage, type_intervention, etat_intervention, origine_intervention, id_vehicule, id_garage) VALUES ('2023-08-15', '2023-08-18', 16500, 'Reparation', 'Terminé', 'Urgence', 5, 2);
 
 --Factures
-INSERT INTO factures(montant, id_intervention, id_client) VALUES (100, 1, 1);
-INSERT INTO factures(montant, id_intervention, id_client) VALUES (250, 2, 2);
-INSERT INTO factures(montant, id_intervention, id_client) VALUES (250, 3, 2);
-INSERT INTO factures(montant, id_intervention, id_client) VALUES (250, 4, 2);
-INSERT INTO factures(montant, id_intervention, id_client) VALUES (250, 5, 3);
-INSERT INTO factures(montant, id_intervention, id_client) VALUES (250, 6, 3);
-INSERT INTO factures(montant, id_intervention, id_client) VALUES (250, 7, 3);
+INSERT INTO factures(montant, id_intervention, id_client, date_facture) VALUES (100, 1, 1, '2023-04-15');
+INSERT INTO factures(montant, id_intervention, id_client, date_facture) VALUES (250, 2, 2, '2023-11-11');
+INSERT INTO factures(montant, id_intervention, id_client, date_facture) VALUES (250, 3, 2, '2023-08-26');
+INSERT INTO factures(montant, id_intervention, id_client, date_facture) VALUES (250, 4, 3, '2023-12-15');
+INSERT INTO factures(montant, id_intervention, id_client, date_facture) VALUES (250, 5, 3, '2021-11-29');
+INSERT INTO factures(montant, id_intervention, id_client, date_facture) VALUES (250, 6, 3, '2023-06-22');
+INSERT INTO factures(montant, id_intervention, id_client, date_facture) VALUES (250, 7, 3, '2023-08-11');
 
 
 --Contenir

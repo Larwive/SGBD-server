@@ -27,5 +27,5 @@ function listeModeleAnneeEcoulee() {
 
 //Nombre d'heures facturées par mois.
 function nbHeuresFacturees() {
-    return "SELECT TO_CHAR(EXTRACT('Year' FROM date_prise_en_charge), '9999') \"année\", TO_CHAR(EXTRACT('Month' FROM date_prise_en_charge), '99') \"mois\", SUM(cout_action) \"heures facturées\" FROM interventions NATURAL JOIN actions GROUP BY EXTRACT('Year' FROM date_prise_en_charge), EXTRACT('Month' FROM date_prise_en_charge) ORDER BY \"année\", \"mois\";\n"
+    return "SELECT TO_CHAR(EXTRACT(YEAR FROM date_facture), '9999')::integer \"année\", TO_CHAR(EXTRACT(MONTH FROM date_facture), '99')::integer \"mois\", sum(duree) \"heures facturées\" FROM actions NATURAL JOIN realiser NATURAL JOIN interventions NATURAL JOIN factures GROUP BY EXTRACT(YEAR FROM date_facture), EXTRACT(MONTH FROM date_facture) ORDER BY \"année\", \"mois\";"
 }
