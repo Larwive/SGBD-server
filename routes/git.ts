@@ -9,13 +9,13 @@ export function route_git(){
         if (process.env.SECRET !== undefined) {
             hmac = crypto.createHmac("sha1", process.env.SECRET);
         }
-        let sig: string =
-            "sha1=" + hmac.update(JSON.stringify(req.body)).digest("hex");
+        //let sig: string =
+            //"sha1=" + hmac.update(JSON.stringify(req.body)).digest("hex");
 
         // If event is "push"
         if (
-            req.headers["x-github-event"] === "push" &&
-            sig === req.headers["x-hub-signature"]
+            req.headers["x-github-event"] === "push"// &&
+            //sig === req.headers["x-hub-signature"]
         ) {
             console.log("Push incoming...");
             if (req.headers["x-github-event"] === "push") {
