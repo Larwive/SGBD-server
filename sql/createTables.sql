@@ -124,6 +124,7 @@ CREATE TABLE "factures" (
   "montant" integer NOT NULL,
   "id_intervention" serial NOT NULL,
   "id_client" serial NOT NULL,
+  "date_facture" date NOT NULL,
 
 CONSTRAINT fk_intervention
       FOREIGN KEY(id_intervention) 
