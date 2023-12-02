@@ -34,17 +34,18 @@ export function route_git(){
                     if (data) console.log(data);
                     if (err) console.log(err);
                 }); // Refresh project
-                let commits: string =
-                    req.body.head_commit.message.split("\n").length === 1
-                        ? req.body.head_commit.message
-                        : req.body.head_commit.message
-                            .split("\n")
-                            .map((el: string, i: number): string =>
-                                i !== 0 ? "                       " + el : el
-                            )
-                            .join("\n");
-                console.log(
-                    `> [GIT] Updated with origin/main\n         Latest commit: ${commits}`);
+                //let commits: string =
+                //    req.body.head_commit.message.split("\n").length === 1
+                //        ? req.body.head_commit.message
+                //        : req.body.head_commit.message
+                //            .split("\n")
+                //            .map((el: string, i: number): string =>
+                //                i !== 0 ? "                       " + el : el
+                //            )
+                //            .join("\n");
+                //console.log(
+                    //`> [GIT] Updated with origin/main\n         Latest commit: ${commits}`);
+                  console.log("Updated with remote.");
             //}
         //}
         return res.status(200).json({ success: "Webhook received successfully." });
