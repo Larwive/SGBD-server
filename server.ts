@@ -10,9 +10,7 @@ const corsOptions: { origin: string[] } = {
     origin: [
         "https://larwive.github.io",
         "https://api.github.com",
-        "http://localhost:3000",
-        "http://10.188.86.239:3000",
-        "*"
+        "http://localhost:3000"
     ], // Reminder : enlever localhost:*
 };
 
