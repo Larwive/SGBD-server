@@ -17,14 +17,14 @@ const corsOptions: { origin: string[] } = {
 app.use(cors(corsOptions)); // Enable CORS for all routes
 app.use(express.json());
 //Routes
-import {route_users} from "./routes/users";
+import {get_table} from "./routes/getTable";
 import {route_intervention} from "./routes/intervention";
 import {route_git} from "./routes/git";
 import {route_data} from "./routes/data";
 import {reset_tables} from "./routes/reset";
 import {create_insert_routes, create_insert_routes2, tables_champs, tables_champs2} from "./routes/insertion";
 
-route_users();
+get_table();
 route_intervention();
 route_git();
 route_data();
