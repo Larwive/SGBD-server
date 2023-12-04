@@ -26,6 +26,7 @@ import {route_data} from "./routes/data";
 import {reset_tables} from "./routes/reset";
 import {route_listModelsInterval} from "./routes/listModelsInterval";
 import {route_nextInterventions} from "./routes/nextInterventions";
+import {route_frequentInterventionOnModels} from "./routes/frequentInterventionOnModels";
 import {create_insert_routes, create_insert_routes2, tables_champs, tables_champs2} from "./routes/insertion";
 
 get_table();
@@ -36,6 +37,7 @@ reset_tables();
 route_nbChargedHours();
 route_listModelsInterval();
 route_nextInterventions();
+route_frequentInterventionOnModels();
 Array.from(tables_champs.entries()).map(([table_name, fields])=>{create_insert_routes(table_name, fields)});
 Array.from(tables_champs2.entries()).map(([table_names, fieldss])=>{create_insert_routes2(table_names, fieldss)});
 

@@ -16,9 +16,9 @@ function nbVehiculesConfiees() {
 // }
 
 //Liste des modèle avec le type d'intervention le plus fréquemment réalisé sur chacun des modèles.
-function interventionsModelesFrequents() {
-    return "SELECT DISTINCT ON (id_modele) id_modele, type_intervention, COUNT(type_intervention) AS intervention_count FROM modeles NATURAL JOIN vehicules NATURAL JOIN interventions GROUP BY id_modele, type_intervention ORDER BY id_modele, intervention_count DESC;;\n"
-}
+// function interventionsModelesFrequents() {
+//     return "SELECT DISTINCT ON (id_modele) id_modele, type_intervention, COUNT(type_intervention) AS intervention_count FROM modeles NATURAL JOIN vehicules NATURAL JOIN interventions GROUP BY id_modele, type_intervention ORDER BY id_modele, intervention_count DESC;;\n"
+// }
 
 //Liste des modèles pris en charge il y a moins d'un an.
 // function listeModeleAnneeEcoulee() {
