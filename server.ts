@@ -6,34 +6,35 @@ require("dotenv").config();
 
 export const app = express();
 
-//Comptes
-import {admin, employe, checkRights} from "./account";
+const corsOptions: { origin: string[] } = {
+    origin: [
+        "https://larwive.github.io",
+        "https://api.github.com",
+        "http://localhost:3000"
+    ], // Reminder : enlever localhost:*
+};
 
+app.use(cors(corsOptions)); // Enable CORS for all routes
+app.use(express.json());
 //Routes
 import {route_users} from "./routes/users";
 import {route_intervention} from "./routes/intervention";
 import {route_git} from "./routes/git";
 import {route_data} from "./routes/data";
 import {reset_tables} from "./routes/reset";
-
+import {create_insert_routes, create_insert_routes2, tables_champs, tables_champs2} from "./routes/insertion";
 
 route_users();
 route_intervention();
 route_git();
 route_data();
 reset_tables();
+Array.from(tables_champs.entries()).map(([table_name, fields])=>{create_insert_routes(table_name, fields)});
+Array.from(tables_champs2.entries()).map(([table_names, fieldss])=>{create_insert_routes2(table_names, fieldss)});
 
 const port: String | 3001 = process.env.PORT || 3001;
-const corsOptions: { origin: string[] } = {
-    origin: [
-        "https://larwive.github.io",
-        "https://api.github.com",
-        "http://localhost:3000",
-    ], // Reminder : enlever localhost:*
-};
 
-app.use(cors(corsOptions)); // Enable CORS for all routes
-app.use(express.json());
+
 
 // Database connection
 export const client = new Client({

@@ -29,7 +29,7 @@
     "typescript": "^5.2.2"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.16",
+    "@types/cors": "^2.8.17",
     "@types/pg": "^8.10.9"
   }
 }
