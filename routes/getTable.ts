@@ -4,10 +4,9 @@ export function get_table() {
     app.post("/users", async (req: any, res: any): Promise<void> => {
         const postData = req.body;
         try {
-            const countQuery = await client.query(`SELECT COUNT(*) FROM ${postData.table};`);
             const rowsQuery = await client.query(`SELECT * FROM ${postData.table};`);
             res.json({
-                count: countQuery.rows[0].count,
+                count: rowsQuery.rows.length,
                 rows: rowsQuery.rows,
             });
         } catch (err) {

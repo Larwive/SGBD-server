@@ -10,10 +10,9 @@ export function route_intervention(){
         const maxDate = postData.postMaxDate === undefined ? 'true' : `date_prise_en_charge <= TO_DATE('${postData.postMaxDate}', 'DD/MM/YYYY')`;
         console.log(`Getting interventions betweens ${minDate} and ${maxDate}.\n`);
         try {
-            const countQuery = await client.query(`SELECT COUNT(*) FROM interventions WHERE ${minDate} AND ${maxDate};`);
             const rowsQuery = await client.query(`SELECT * FROM interventions WHERE ${minDate} AND ${maxDate};`);
             res.json({
-                count: countQuery.rows[0].count,
+                count: rowsQuery.rows.length,
                 rows: rowsQuery.rows
             });
         } catch (err) {
