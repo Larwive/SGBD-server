@@ -20,11 +20,12 @@ app.use(express.json());
 //Routes
 import {get_table} from "./routes/getTable";
 import {route_intervention} from "./routes/intervention";
-import {route_nbHeuresFacturees} from "./routes/nbHeuresFacturees";
+import {route_nbChargedHours} from "./routes/nbChargedHours";
 import {route_git} from "./routes/git";
 import {route_data} from "./routes/data";
 import {reset_tables} from "./routes/reset";
-import {route_listeModeleInterval} from "./routes/route_listeModeleInterval";
+import {route_listModelsInterval} from "./routes/listModelsInterval";
+import {route_nextInterventions} from "./routes/nextInterventions";
 import {create_insert_routes, create_insert_routes2, tables_champs, tables_champs2} from "./routes/insertion";
 
 get_table();
@@ -32,8 +33,9 @@ route_intervention();
 route_git();
 route_data();
 reset_tables();
-route_nbHeuresFacturees();
-route_listeModeleInterval();
+route_nbChargedHours();
+route_listModelsInterval();
+route_nextInterventions();
 Array.from(tables_champs.entries()).map(([table_name, fields])=>{create_insert_routes(table_name, fields)});
 Array.from(tables_champs2.entries()).map(([table_names, fieldss])=>{create_insert_routes2(table_names, fieldss)});
 
