@@ -6,9 +6,9 @@
 // }
 
 //Liste des clients avec le nombre de véhicules qu’ils ont confiés au garage.
-function nbVehiculesConfiees() {
-    return "SELECT clients.*, COUNT(immatriculation) AS \"nombre de véhicules confiés\" FROM clients NATURAL JOIN vehicules GROUP BY id_client;";
-}
+// function nbVehiculesConfiees() {
+//     return "SELECT clients.*, COUNT(immatriculation) AS \"nombre de véhicules confiés\" FROM clients NATURAL JOIN vehicules GROUP BY id_client;";
+// }
 
 // Liste des interventions prévues dans les deux prochains mois.
 // function listInterventionsDeuxMois() {
