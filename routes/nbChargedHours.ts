@@ -1,7 +1,13 @@
 import {app, client} from "../server";
 
-export function route_nbHeuresFacturees(){
-    app.post('/nbHeuresFacturees', async (req, res) => {
+
+// Every months along with the hours + minutes charged for it  
+// Parameters : -postMaxDate >> Maximum date limit
+//                  usage : "postMaxDate" : "01/10/2023"
+//            : -postMinDate >> Minimum date limit 
+//                  usage : "postMinDate" : "8/4/2022"
+export function route_nbChargedHours(){
+    app.post('/nbChargedHours', async (req, res) => {
         const postData = req.body;
     
         console.log("NbHeureFacturees POstdata : \n",postData);
@@ -15,7 +21,7 @@ export function route_nbHeuresFacturees(){
                 rows: rowsQuery.rows
             });
         } catch (err) {
-            console.error('Error getting the nbHeuresFacturees table\'s data.', err);
+            console.error('Error getting the nbChargedHours table\'s data.', err);
             res.status(500).json({error: 'An error occurred (POST)'});
         }
     })
