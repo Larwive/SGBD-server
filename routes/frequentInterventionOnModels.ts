@@ -8,7 +8,7 @@ export function route_frequentInterventionOnModels(){
             const rowsQuery = await client.query(`SELECT DISTINCT ON (id_modele) id_modele, type_intervention, COUNT(type_intervention) AS intervention_count FROM modeles NATURAL JOIN vehicules NATURAL JOIN interventions GROUP BY id_modele, type_intervention ORDER BY id_modele, intervention_count DESC;;`
             );
             res.json({
-                count: rowsQuery.rows.length,
+                count: rowsQuery.rowCount,
                 rows: rowsQuery.rows
             });
         } catch (err) {

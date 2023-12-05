@@ -17,7 +17,7 @@ export function route_nbChargedHours(){
         try {
             const rowsQuery = await client.query(`SELECT TO_CHAR(EXTRACT(YEAR FROM date_facture), '9999')::integer \"année\", TO_CHAR(EXTRACT(MONTH FROM date_facture), '99')::integer \"mois\", sum(duree) \"heures facturées\" FROM actions NATURAL JOIN realiser NATURAL JOIN interventions NATURAL JOIN factures WHERE ${minDate} AND ${maxDate} GROUP BY EXTRACT(YEAR FROM date_facture), EXTRACT(MONTH FROM date_facture) ORDER BY \"année\", \"mois\";`);
             res.json({
-                count: rowsQuery.rows.length,
+                count: rowsQuery.rowCount,
                 rows: rowsQuery.rows
             });
         } catch (err) {

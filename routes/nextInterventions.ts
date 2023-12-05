@@ -16,7 +16,7 @@ export function route_nextInterventions(){
         try {
             const rowsQuery = await client.query(`SELECT * FROM interventions WHERE ${minDate} AND ${maxDate};`);
             res.json({
-                count: rowsQuery.rows.length,
+                count: rowsQuery.rowCount,
                 rows: rowsQuery.rows
             });
         } catch (err) {
