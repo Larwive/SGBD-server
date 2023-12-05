@@ -18,7 +18,7 @@ export function route_entrustedVehicules(){
             const rowsQuery = await client.query(`SELECT clients.*, COUNT(immatriculation) AS \"nombre de véhicules confiés\" FROM clients NATURAL JOIN vehicules WHERE ${name} AND ${surname} GROUP BY id_client;`
             );
             res.json({
-                count: rowsQuery.rows.length,
+                count: rowsQuery.rowCount,
                 rows: rowsQuery.rows
             });
         } catch (err) {

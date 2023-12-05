@@ -19,7 +19,7 @@ export function route_listModelsInterval(){
             const rowsQuery = await client.query(`SELECT DISTINCT modeles.* FROM modeles NATURAL JOIN vehicules NATURAL JOIN interventions WHERE ${maxDate} AND ${minDate};`
             );
             res.json({
-                count: rowsQuery.rows.length,
+                count: rowsQuery.rowCount,
                 rows: rowsQuery.rows
             });
         } catch (err) {

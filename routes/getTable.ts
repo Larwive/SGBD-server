@@ -1,12 +1,12 @@
 import { app, client } from "../server";
 
 export function get_table() {
-    app.post("/users", async (req: any, res: any): Promise<void> => {
+    app.post("/gettable", async (req: any, res: any): Promise<void> => {
         const postData = req.body;
         try {
             const rowsQuery = await client.query(`SELECT * FROM ${postData.table};`);
             res.json({
-                count: rowsQuery.rows.length,
+                count: rowsQuery.rowCount,
                 rows: rowsQuery.rows,
             });
         } catch (err) {
