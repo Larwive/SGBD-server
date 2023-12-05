@@ -30,6 +30,7 @@ import {route_frequentInterventionOnModels} from "./routes/frequentInterventionO
 import {route_invoicesSum} from "./routes/invoicesSum";
 import {route_entrustedVehicules} from "./routes/entrustedVehicules";
 import {route_action} from "./routes/action";
+import {route_search} from "./routes/search";
 import {create_insert_routes, create_insert_routes2, tables_champs, tables_champs2} from "./routes/insertion";
 
 get_table();
@@ -44,6 +45,7 @@ route_frequentInterventionOnModels();
 route_invoicesSum();
 route_entrustedVehicules();
 route_action();
+route_search();
 Array.from(tables_champs.entries()).map(([table_name, fields])=>{create_insert_routes(table_name, fields)});
 Array.from(tables_champs2.entries()).map(([table_names, fieldss])=>{create_insert_routes2(table_names, fieldss)});
 
