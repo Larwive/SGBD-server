@@ -8,8 +8,8 @@ export function route_intervention(){
         console.log("intervention POstdata : \n",postData);
         const minDate = postData.postMinDate === undefined ? 'true' : `date_prise_en_charge >= TO_DATE('${postData.postMinDate}', 'DD/MM/YYYY')`;
         const maxDate = postData.postMaxDate === undefined ? 'true' : `date_prise_en_charge <= TO_DATE('${postData.postMaxDate}', 'DD/MM/YYYY')`;
-        const forename = postData.client_forename === undefined ? 'true' : `prenom_client='${postData.client_forename}'`;
-        const surname = postData.client_surname === undefined ? 'true' : `nom_client='${postData.client_surname}'`;
+        const forename = postData.prenom_client === undefined ? 'true' : `prenom_client='${postData.prenom_client}'`;
+        const surname = postData.nom_client === undefined ? 'true' : `nom_client='${postData.nom_client}'`;
         console.log(`Getting interventions betweens ${minDate} and ${maxDate}.\n`);
         try {
             const rowsQuery = await client.query(`SELECT * FROM interventions NATURAL JOIN factures NATURAL JOIN clients WHERE ${minDate} AND ${maxDate} AND ${forename} AND ${surname};`);

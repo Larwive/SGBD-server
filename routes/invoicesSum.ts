@@ -11,8 +11,8 @@ export function route_invoicesSum(){
         const postData = req.body;
 
         console.log("invoicesSum POstdata : \n",postData);
-        const forename = postData.client_forename === undefined ? 'true' : `prenom_client='${postData.client_forename}'`;
-        const surname = postData.client_surname === undefined ? 'true' : `nom_client='${postData.client_surname}'`;
+        const forename = postData.prenom_client === undefined ? 'true' : `prenom_client='${postData.prenom_client}'`;
+        const surname = postData.nom_client === undefined ? 'true' : `nom_client='${postData.nom_client}'`;
         console.log(`Getting invoicesSum for client ${forename} and ${surname}.\n`);
         try {
             const rowsQuery = await client.query(`SELECT clients.*, SUM(montant) AS \"montant facturé\" FROM clients NATURAL JOIN factures WHERE ${forename} AND ${surname} GROUP BY id_client;`
