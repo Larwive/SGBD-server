@@ -17,7 +17,8 @@ CREATE TABLE "clients" (
 CREATE TABLE "pieces" (
   "id_piece" serial ,
   PRIMARY KEY ("id_piece"),
-  "nom_piece" text NOT NULL
+  "nom_piece" text NOT NULL,
+  UNIQUE (nom_piece)
 );
 
 CREATE TABLE "personnels" (
@@ -41,7 +42,8 @@ CREATE TABLE "actions" (
   PRIMARY KEY ("id_action"),
   "cout_action" integer NOT NULL,
   "intitule" text NOT NULL,
-  "duree" interval NOT NULL
+  "duree" interval NOT NULL,
+  UNIQUE (intitule)
 );
 
 CREATE TABLE "garages" (
@@ -71,6 +73,7 @@ CREATE TABLE "vehicules" (
   "type_vehicule" text NOT NULL,
   "id_client" serial NOT NULL,
   "id_modele" serial NOT NULL,
+  UNIQUE (immatriculation),
 
 CONSTRAINT fk_client
       FOREIGN KEY(id_client) 
