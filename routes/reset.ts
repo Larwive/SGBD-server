@@ -11,8 +11,9 @@ export function reset_tables(){
             return res.status(500).json({error: "Pas les droits/mauvais nom d'utilisateur ou mot de passe."});
         }
         try {
-            await client.query(readFileSync("./sql/createTables.sql",'utf8'));
-            await client.query(readFileSync("./sql/populateTables.sql",'utf8'));
+            await client.query(readFileSync("./sql/drop.sql",'utf8'));
+            await client.query(readFileSync("./sql/create.sql",'utf8'));
+            await client.query(readFileSync("./sql/insert.sql",'utf8'));
             res.status(200).json({success: 'Tables réinitialisées.'});
         } catch (err) {
             console.error("Error :", err);
