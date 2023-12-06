@@ -11,8 +11,8 @@ export function route_entrustedVehicules(){
         const postData = req.body;
 
         console.log("entrustedVehicules POstdata : \n",postData);
-        const name = postData.postName === undefined ? 'true' : `prenom_client = '${postData.postName}'`;
-        const surname = postData.postSurname === undefined ? 'true' : `nom_client = '${postData.postSurname}'`;
+        const name = postData.prenom_client === undefined ? 'true' : `prenom_client = '${postData.prenom_client}'`;
+        const surname = postData.nom_client === undefined ? 'true' : `nom_client = '${postData.nom_client}'`;
         console.log(`Getting entrustedVehicules for client ${name} and ${surname}.\n`);
         try {
             const rowsQuery = await client.query(`SELECT clients.*, COUNT(immatriculation) AS \"nombre de véhicules confiés\" FROM clients NATURAL JOIN vehicules WHERE ${name} AND ${surname} GROUP BY id_client;`
