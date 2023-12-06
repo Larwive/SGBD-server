@@ -1,47 +1,47 @@
 CREATE TABLE "constructeurs" (
   "id_constructeur" serial ,
   PRIMARY KEY ("id_constructeur"),
-  "nom_constructeur" text NOT NULL
+  "nom_constructeur" text NOT NULL CHECK (nom_constructeur <> '')
 );
 
 CREATE TABLE "clients" (
   "id_client" serial ,
   PRIMARY KEY ("id_client"),
-  "nom_client" text NOT NULL,
-  "prenom_client" text NOT NULL,
-  "adresse_client" text NOT NULL,
-  "mail_client" text NOT NULL,
-  "telephone_client" text NOT NULL
+  "nom_client" text NOT NULL CHECK (nom_client <> ''),
+  "prenom_client" text NOT NULL CHECK (prenom_client <> ''),
+  "adresse_client" text NOT NULL CHECK (adresse_client <> ''),
+  "mail_client" text NOT NULL CHECK (mail_client <> ''),
+  "telephone_client" text NOT NULL CHECK (telephone_client <> '')
 );
 
 CREATE TABLE "pieces" (
   "id_piece" serial ,
   PRIMARY KEY ("id_piece"),
-  "nom_piece" text NOT NULL,
+  "nom_piece" text NOT NULL CHECK (nom_piece <> ''),
   UNIQUE (nom_piece)
 );
 
 CREATE TABLE "personnels" (
   "id_employe" serial ,
   PRIMARY KEY ("id_employe"),
-  "nom_employe" text NOT NULL,
-  "prenom_employe" text NOT NULL,
-  "telephone_employe" text NOT NULL,
-  "poste" text NOT NULL
+  "nom_employe" text NOT NULL CHECK (nom_employe <> ''),
+  "prenom_employe" text NOT NULL CHECK (prenom_employe <> ''),
+  "telephone_employe" text NOT NULL CHECK (telephone_employe <> ''),
+  "poste" text NOT NULL CHECK (poste <> '')
 );
 
 CREATE TABLE "fabricants" (
   "id_fabricant" serial ,
   PRIMARY KEY ("id_fabricant"),
-  "nom_fabricant" text NOT NULL,
-  "adresse_fabricant" text NOT NULL
+  "nom_fabricant" text NOT NULL CHECK (nom_fabricant <> ''),
+  "adresse_fabricant" text NOT NULL CHECK (adresse_fabricant <> '')
 );
 
 CREATE TABLE "actions" (
   "id_action" serial ,
   PRIMARY KEY ("id_action"),
   "cout_action" integer NOT NULL,
-  "intitule" text NOT NULL,
+  "intitule" text NOT NULL CHECK (intitule <> ''),
   "duree" interval NOT NULL,
   UNIQUE (intitule)
 );
@@ -49,15 +49,15 @@ CREATE TABLE "actions" (
 CREATE TABLE "garages" (
   "id_garage" serial ,
   PRIMARY KEY ("id_garage"),
-  "nom_garage" text NOT NULL,
-  "adresse_garage" text NOT NULL
+  "nom_garage" text NOT NULL CHECK (nom_garage <> ''),
+  "adresse_garage" text NOT NULL CHECK (adresse_garage <> '')
 );
 
 CREATE TABLE "modeles" (
   "id_modele" serial ,
   PRIMARY KEY ("id_modele"),
-  "type_motorisation" text NOT NULL,
-  "nom_modele" text NOT NULL,
+  "type_motorisation" text NOT NULL CHECK (type_motorisation <> ''),
+  "nom_modele" text NOT NULL CHECK (nom_modele <> ''),
   "id_constructeur" serial NOT NULL,
 
 CONSTRAINT fk_constructeur
@@ -68,9 +68,9 @@ CONSTRAINT fk_constructeur
 CREATE TABLE "vehicules" (
   "id_vehicule" serial ,
   PRIMARY KEY ("id_vehicule"),
-  "immatriculation" text NOT NULL,
+  "immatriculation" text NOT NULL CHECK (immatriculation <> ''),
   "date_de_mise_en_circulation" date NOT NULL,
-  "type_vehicule" text NOT NULL,
+  "type_vehicule" text NOT NULL CHECK (type_vehicule <> ''),
   "id_client" serial NOT NULL,
   "id_modele" serial NOT NULL,
   UNIQUE (immatriculation),
@@ -90,9 +90,9 @@ CREATE TABLE "interventions" (
   "date_prise_en_charge" date NOT NULL,
   "date_retour_prevue" date NOT NULL,
   "kilometrage" integer NOT NULL,
-  "type_intervention" text NOT NULL,
-  "etat_intervention" text NOT NULL,
-  "origine_intervention" text NOT NULL,
+  "type_intervention" text NOT NULL CHECK (type_intervention <> ''),
+  "etat_intervention" text NOT NULL CHECK (etat_intervention <> ''),
+  "origine_intervention" text NOT NULL CHECK (origine_intervention <> ''),
   "id_vehicule" serial NOT NULL,
   "id_garage" serial NOT NULL,
 
