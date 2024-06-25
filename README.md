@@ -1,3 +1,5 @@
+Archivé car le projet originel est fini.
+
 # SGBD-server
 
 Un serveur utilisant `express.js` pour implémenter une API faisant des requêtes SQL.
